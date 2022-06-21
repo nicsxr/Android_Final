@@ -4,9 +4,15 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import androidx.viewpager.widget.ViewPager
 import com.example.android_final.models.api.Coins
+import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,49 +20,53 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.Serializable
 
-class MainActivity : AppCompatActivity() {
-    private val baseUrl = "https://api.coingecko.com/api/v3/"
 
-    lateinit var resourcesAdapter: CoinsAdapter
-    lateinit var linearLayoutManager: LinearLayoutManager
-    lateinit var recyclerView: RecyclerView
+class MainActivity : AppCompatActivity() {
+    private lateinit var db : AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        getCoins(this)
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "UserCoins"
+        ).build()
+
+
+
+        val viewPager =  findViewById<ViewPager>(R.id.viewPager)
+        val mainAdapter = ViewPagerAdapter(supportFragmentManager)
+        mainAdapter.addFragment(MainFragment(), "Current prices")
+        mainAdapter.addFragment(MainFragment(), "Portfolio")
+        viewPager.adapter = mainAdapter
+        findViewById<TabLayout>(R.id.tabs).setupWithViewPager(viewPager)
     }
 
+    fun getDbContext() : AppDatabase{
+        return db
+    }
+    class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+        private val fragmentList : MutableList<Fragment> = ArrayList()
+        private val titleList : MutableList<String> = ArrayList()
 
-    private fun getCoins(context: Context){
-        val retrofitBuilder = Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(baseUrl)
-            .build()
-            .create(ApiInterface::class.java)
 
-        val data = retrofitBuilder.getCoins()
+        override fun getCount(): Int {
+            return fragmentList.size
+        }
 
-        data.enqueue(object : Callback<Coins?> {
-            override fun onResponse(
-                call: Call<Coins?>,
-                response: Response<Coins?>
-            ) {
-                val body = response.body()!!
-                linearLayoutManager = LinearLayoutManager(context)
-                recyclerView = findViewById(R.id.coinsRecyclerView)
-                recyclerView.layoutManager = linearLayoutManager
-                resourcesAdapter = CoinsAdapter(baseContext, body)
-                resourcesAdapter.notifyDataSetChanged()
-                recyclerView.adapter = resourcesAdapter
-                println(body)
-            }
+        override fun getItem(position: Int): Fragment {
+            return fragmentList[position]
+        }
 
-            override fun onFailure(call: Call<Coins?>, t: Throwable) {
-                println(t)
-                println("------------------------------------------")
-            }
-        })
+        fun addFragment(fragment: Fragment, title: String){
+            fragmentList.add(fragment)
+            titleList.add(title)
+        }
+
+        override fun getPageTitle(position: Int): CharSequence? {
+            return titleList[position]
+        }
+
     }
 }

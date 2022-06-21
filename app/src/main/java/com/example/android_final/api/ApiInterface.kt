@@ -1,4 +1,4 @@
-package com.example.android_final
+package com.example.android_final.api
 
 import retrofit2.Call
 import com.example.android_final.models.api.Coins
