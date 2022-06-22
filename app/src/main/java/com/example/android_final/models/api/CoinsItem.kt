@@ -1,5 +1,6 @@
 package com.example.android_final.models.api
 
+import java.io.Serializable
 import java.math.BigInteger
 
 data class CoinsItem(
@@ -29,4 +30,4 @@ data class CoinsItem(
     val symbol: String,
     val total_supply: Double,
     val total_volume: Double
-)
+) : Serializable

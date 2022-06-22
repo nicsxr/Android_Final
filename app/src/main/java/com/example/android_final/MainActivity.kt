@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -33,12 +34,10 @@ class MainActivity : AppCompatActivity() {
             AppDatabase::class.java, "UserCoins"
         ).build()
 
-
-
         val viewPager =  findViewById<ViewPager>(R.id.viewPager)
         val mainAdapter = ViewPagerAdapter(supportFragmentManager)
         mainAdapter.addFragment(MainFragment(), "Current prices")
-        mainAdapter.addFragment(MainFragment(), "Portfolio")
+        mainAdapter.addFragment(PortfolioFragment(), "Portfolio")
         viewPager.adapter = mainAdapter
         findViewById<TabLayout>(R.id.tabs).setupWithViewPager(viewPager)
     }

@@ -1,11 +1,7 @@
 package com.example.android_final.db
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.android_final.models.DB.UserCoins
-
 @Dao
 interface UserCoinsDao {
     @Query("Select * from UserCoins")
@@ -15,7 +11,10 @@ interface UserCoinsDao {
     fun getCoinData(coinId : String) : List<UserCoins>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertData()
+    fun insertData(userCoins: UserCoins)
+
+    @Query("DELETE FROM UserCoins")
+    fun deleteData()
 
 //    @Query("Select coinId, SUM(buyAmount) as totalBuy, AVG(buyPrice), MAX(buyDate), imageUrl from UserCoins")
 //    fun getAverageData() : List<UserCoins>
