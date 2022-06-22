@@ -1,33 +1,27 @@
 package com.example.android_final
 
-import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import androidx.viewpager.widget.ViewPager
-import com.example.android_final.models.api.Coins
 import com.google.android.material.tabs.TabLayout
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.io.Serializable
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
     private lateinit var db : AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        registerReceiver(ConnectivityReceiver(), IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
 
         db = Room.databaseBuilder(
             applicationContext,
@@ -67,5 +61,16 @@ class MainActivity : AppCompatActivity() {
             return titleList[position]
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
+    }
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        if(!isConnected){
+            val toast = Toast.makeText(this, "You are offline", Toast.LENGTH_SHORT)
+            toast.show()
+        }
     }
 }
