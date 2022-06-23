@@ -16,9 +16,11 @@ Q. Will I be able to also simulate selling my purchased items in the near future
 
 A. Sadly, this feature will take some time to get added, but will definitely arrive eventually.
 
+
 Q. I see that there isn't much info displayed for each crypto currency. Why not? You definitely could add more.
 
 A. You see, main advantage of our app is that it's compact and quite simple. It provides all the necessary info and we don't plan on adding additional details.
+
 
 Q. Loving this simplistic approach. Will you be creating more apps in the future related to something else (maybe stocks)?
 
