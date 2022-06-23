@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.android_final.api.ApiInterface
@@ -18,7 +19,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment() , ConnectivityReceiver.ConnectivityReceiverListener{
     private val baseUrl = "https://api.coingecko.com/api/v3/"
 
     lateinit var resourcesAdapter: CoinsAdapter
@@ -54,6 +55,8 @@ class MainFragment : Fragment() {
                 val body = response.body()!!
                 linearLayoutManager = LinearLayoutManager(context)
                 recyclerView = requireActivity().findViewById(R.id.coinsRecyclerView)
+                if (recyclerView.visibility == View.INVISIBLE)
+                    recyclerView.visibility = View.VISIBLE
                 recyclerView.layoutManager = linearLayoutManager
                 resourcesAdapter = CoinsAdapter(requireContext(), body)
                 resourcesAdapter.notifyDataSetChanged()
@@ -66,5 +69,22 @@ class MainFragment : Fragment() {
                 println("------------------------------------------")
             }
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ConnectivityReceiver.connectivityReceiverListener = this
+    }
+
+    override fun onNetworkConnectionChanged(isConnected: Boolean) {
+        if(!isConnected){
+            val toast = Toast.makeText(activity, "You are offline", Toast.LENGTH_SHORT)
+            println("------------Disconn-------------")
+            recyclerView.visibility = View.INVISIBLE
+            toast.show()
+        }else{
+            getCoins(requireActivity())
+            println("-------------Conn---------------")
+        }
     }
 }

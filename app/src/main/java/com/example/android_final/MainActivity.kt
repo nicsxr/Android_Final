@@ -14,7 +14,7 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 
 
-class MainActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityReceiverListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var db : AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,14 +63,5 @@ class MainActivity : AppCompatActivity(), ConnectivityReceiver.ConnectivityRecei
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        ConnectivityReceiver.connectivityReceiverListener = this
-    }
-    override fun onNetworkConnectionChanged(isConnected: Boolean) {
-        if(!isConnected){
-            val toast = Toast.makeText(this, "You are offline", Toast.LENGTH_SHORT)
-            toast.show()
-        }
-    }
+
 }
