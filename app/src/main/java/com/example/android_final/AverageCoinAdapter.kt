@@ -24,19 +24,12 @@ import com.example.android_final.models.AverageCoins
 
 class AverageCoinAdapter (val context: Context, val coins: List<AverageCoins>) : RecyclerView.Adapter<AverageCoinAdapter.ViewHolder>(){
     class ViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var icon : ImageView
-        var name : TextView
-        var symbol : TextView
-        var price : TextView
-        var change_24h : TextView
+        var icon : ImageView = itemView.findViewById(R.id.coinIcon)
+        var name : TextView = itemView.findViewById(R.id.coinName)
+        var symbol : TextView = itemView.findViewById(R.id.coinSymbol)
+        var price : TextView = itemView.findViewById(R.id.coinPrice)
+        var change_24h : TextView = itemView.findViewById(R.id.coinChange24)
 
-        init{
-            icon = itemView.findViewById(R.id.coinIcon)
-            name = itemView.findViewById(R.id.coinName)
-            symbol = itemView.findViewById(R.id.coinSymbol)
-            price = itemView.findViewById(R.id.coinPrice)
-            change_24h = itemView.findViewById(R.id.coinChange24)
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
