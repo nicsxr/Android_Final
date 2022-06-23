@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.android_final.api.ApiInterface
 import com.example.android_final.api.CoinsAdapter
 import com.example.android_final.models.api.Coins
@@ -26,6 +27,7 @@ class MainFragment : Fragment() , ConnectivityReceiver.ConnectivityReceiverListe
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var recyclerView: RecyclerView
 
+    private lateinit var swipeRefreshLayout : SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +37,16 @@ class MainFragment : Fragment() , ConnectivityReceiver.ConnectivityReceiverListe
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        linearLayoutManager = LinearLayoutManager(context)
+        recyclerView = requireActivity().findViewById(R.id.coinsRecyclerView)
+        swipeRefreshLayout = requireActivity().findViewById(R.id.mainLayout)
         getCoins(requireActivity())
+
+        swipeRefreshLayout.setOnRefreshListener {
+            getCoins(requireContext())
+            swipeRefreshLayout.isRefreshing = false
+            Toast.makeText(requireContext(), "Refreshed", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun getCoins(context: Context){
@@ -53,8 +64,7 @@ class MainFragment : Fragment() , ConnectivityReceiver.ConnectivityReceiverListe
                 response: Response<Coins?>
             ) {
                 val body = response.body()!!
-                linearLayoutManager = LinearLayoutManager(context)
-                recyclerView = requireActivity().findViewById(R.id.coinsRecyclerView)
+
                 if (recyclerView.visibility == View.INVISIBLE)
                     recyclerView.visibility = View.VISIBLE
                 recyclerView.layoutManager = linearLayoutManager
