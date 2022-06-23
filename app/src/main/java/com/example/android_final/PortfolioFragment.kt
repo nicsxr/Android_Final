@@ -11,24 +11,21 @@ import android.widget.TextView
 import android.R.attr.right
 
 import android.R.attr.left
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.android_final.api.AverageCoinAdapter
+import com.example.android_final.api.CoinsAdapter
+import com.example.android_final.models.AverageCoins
+import com.example.android_final.models.api.Coins
+import com.example.android_final.models.api.CoinsItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class PortfolioFragment : Fragment() {
     private lateinit var db : AppDatabase
-    private lateinit var testText : TextView
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//
-//
-//        db = (activity as MainActivity?)!!.getDbContext()
-//
-//        println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-----------")
-//        testText = requireActivity().findViewById(R.id.testText)
-//        println(testText.text)
-////        requireActivity().findViewById<TextView>(R.id.testText).text =  db.userCoinsDao().getAllData().toString()
-////        println(db.userCoinsDao().getAllData().toString())
-//    }
+    lateinit var resourcesAdapter: AverageCoinAdapter
+    lateinit var linearLayoutManager: LinearLayoutManager
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +36,10 @@ class PortfolioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         db = (activity as MainActivity?)!!.getDbContext()
-//
-        println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-----------")
-        testText = requireActivity().findViewById(R.id.testText)
-        println(testText.text)
+
+        linearLayoutManager = LinearLayoutManager(context)
+        recyclerView = requireActivity().findViewById(R.id.averageRecycler)
+        recyclerView.layoutManager = linearLayoutManager
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -54,23 +51,13 @@ class PortfolioFragment : Fragment() {
 
     private fun getData() {
         Thread{
-            val data = db.userCoinsDao().getAllData()
-//            db.userCoinsDao().deleteData()
+            val data = db.userCoinsDao().getAverageData()
             requireActivity().runOnUiThread {
-                testText.text = data.toString().takeLast(1000)
-                println(data.toString())
+                resourcesAdapter = AverageCoinAdapter(requireContext(), data)
+                resourcesAdapter.notifyDataSetChanged()
+                recyclerView.adapter = resourcesAdapter
             }
 
         }.start()
     }
-
-    fun updateUI(){
-//        Thread{
-//            run
-//        }
-//        runOnUiThread(Dispatchers.Main) {
-//            textView.text = it.name
-//        }
-    }
-
 }

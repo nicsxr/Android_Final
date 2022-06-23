@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Android_Final">
         <activity
+            android:name=".CoinDataPortfolioActivity"
+            android:exported="false" />
+        <activity
             android:name=".CoinInfoActivity"
             android:exported="false" />
         <activity
@@ -25,10 +28,11 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".ConnectivityReceiver"
-            android:label="ConnectivityDetection"
+        <receiver
+            android:name=".ConnectivityReceiver"
+            android:enabled="true"
             android:exported="true"
-            android:enabled="true">
+            android:label="ConnectivityDetection">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>

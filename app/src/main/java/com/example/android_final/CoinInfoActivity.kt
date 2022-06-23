@@ -42,7 +42,7 @@ class CoinInfoActivity : AppCompatActivity() {
 
 
         Thread{
-            val userCoin = UserCoins(coin.id, amount, coin.current_price, dateNow, coin.image)
+            val userCoin = UserCoins(coin.id, coin.name, coin.symbol, amount, amount/coin.current_price, coin.current_price, dateNow, coin.image)
             db.userCoinsDao().insertData(userCoin)
         }.start()
         Toast.makeText(this,"Bought $" + amount + " worth of " + coin.name + " at $" + coin.current_price, Toast.LENGTH_LONG).show()

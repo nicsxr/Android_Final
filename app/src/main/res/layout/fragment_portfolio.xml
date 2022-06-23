@@ -6,12 +6,9 @@
     tools:context=".PortfolioFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/testText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="1sp"
-        android:layout_marginTop="20sp"
-        android:text="TEST TEXT>." />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/averageRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </FrameLayout>

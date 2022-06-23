@@ -7,7 +7,10 @@ import java.util.*
 @Entity(tableName = "UserCoins")
 data class UserCoins(
     val coinId : String,
+    val name : String,
+    val symbol : String,
     val buyAmount : Double,
+    val coinAmount : Double,
     val buyPrice : Double,
     val buyDate : Long,
     val imageUrl : String
