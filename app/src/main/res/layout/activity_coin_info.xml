@@ -8,21 +8,23 @@
 
     <ImageView
         android:id="@+id/titleImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/bitcoin" />
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Bitcoin Cash"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/titleImageView"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/titleImageView"
         app:layout_constraintTop_toTopOf="@+id/titleImageView" />
 
@@ -58,4 +60,62 @@
         app:layout_constraintEnd_toEndOf="@+id/buyAmountInput"
         app:layout_constraintStart_toStartOf="@+id/buyAmountInput"
         app:layout_constraintTop_toBottomOf="@+id/buyAmountInput" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Current Price:"
+        app:layout_constraintStart_toStartOf="@+id/titleTextView"
+        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+    <TextView
+        android:id="@+id/textCurrentValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$26,490"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="24H High:"
+        android:textColor="#00FF00"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/text24H"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$27,330"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintStart_toEndOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="24H Low:"
+        android:textColor="#FF0000"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/text24L"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$22,334"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+        app:layout_constraintStart_toEndOf="@+id/textView6" />
 </androidx.constraintlayout.widget.ConstraintLayout>

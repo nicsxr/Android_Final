@@ -6,15 +6,92 @@
     android:layout_height="match_parent"
     tools:context=".CoinDataPortfolioActivity">
 
+    <ImageView
+        android:id="@+id/portfolioImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bitcoin" />
+
     <TextView
-        android:id="@+id/testTextView"
+        android:id="@+id/portfolioTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
-        android:text="TextView"
-        android:textSize="34sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Bitcoin Cash"
+        android:textSize="32sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/portfolioImage"
+        app:layout_constraintTop_toTopOf="@+id/portfolioImage" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total spent:"
+        app:layout_constraintStart_toStartOf="@+id/portfolioTitle"
+        app:layout_constraintTop_toBottomOf="@+id/portfolioTitle" />
+
+    <TextView
+        android:id="@+id/textTotalBuy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="$26,490"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total coins:"
+        app:layout_constraintStart_toStartOf="@+id/textView10"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textTotalCoins"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="27330"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toEndOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Average buy Price:"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/averageBuyPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$27,330"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView12"
+        app:layout_constraintStart_toEndOf="@+id/textView12" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/portfolioRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/portfolioImage"
+        tools:listitem="@layout/coin_item" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

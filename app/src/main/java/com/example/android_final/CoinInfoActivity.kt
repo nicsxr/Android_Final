@@ -23,6 +23,10 @@ class CoinInfoActivity : AppCompatActivity() {
         buyAmountInput = findViewById(R.id.buyAmountInput)
         coin = intent.getSerializableExtra("coin") as CoinsItem
         findViewById<TextView>(R.id.titleTextView).text = coin.name
+
+        findViewById<TextView>(R.id.textCurrentValue).text = "$"+coin.current_price
+        findViewById<TextView>(R.id.text24H).text = "$"+coin.high_24h
+        findViewById<TextView>(R.id.text24L).text = "$"+coin.low_24h
         Picasso.get().load(coin.image).into(findViewById<ImageView>(R.id.titleImageView))
 
 

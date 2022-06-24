@@ -8,8 +8,8 @@ interface UserCoinsDao {
     @Query("Select * from UserCoins")
     fun getAllData() : MutableList<UserCoins>
 
-    @Query("Select * from UserCoins WHERE coinId LIKE :coinId")
-    fun getCoinData(coinId : String) : MutableList<UserCoins>
+    @Query("Select coinId, name, symbol, buyAmount as totalBuy, coinAmount, buyPrice as averagePrice, buyDate, imageUrl as image from UserCoins WHERE coinId LIKE :coinId")
+    fun getCoinData(coinId : String) : MutableList<AverageCoins>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertData(userCoins: UserCoins)
@@ -19,5 +19,4 @@ interface UserCoinsDao {
 
     @Query("Select coinId, name, symbol, SUM(buyAmount) as totalBuy, SUM(coinAmount) as coinAmount, AVG(buyPrice) as averagePrice, MAX(buyDate), imageUrl as image from UserCoins Group by coinId")
     fun getAverageData() : List<AverageCoins>
-
 }
