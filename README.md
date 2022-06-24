@@ -6,6 +6,9 @@ Simple crypto-related app
 
 Our app lets you view basic info about various different popular crypto currencies and it also allows you to simulate trading. You have your own little space - portfolio, where all your 'purchased' cryptos are kept. App has neat features, like letting you know whenever you are disconnected from the internet, so you instantly know why crypto prices aren't updating. Additionally, app will also inform you of any significant changes to crypto prices with a push notification.
 
+To access info about cryptos our app uses **CoinGecko** API, while making requests using **Retrofit**.
+We also use **Room** to store information about your precious 'purchased' crypto in a local database.
+
 ## Getting Started
 
 Just download the app, launch it and you are all set! Inside the app, you have two main areas:
