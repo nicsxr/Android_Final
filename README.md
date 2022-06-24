@@ -10,11 +10,13 @@ Our app lets you view basic info about various different popular crypto currenci
 
 Just download the app, launch it and you are all set! Inside the app, you have two main areas:
 * Current Prices
+
 Here, you can view up-to-date prices of various crypto currencies. You can pick one to see extra info about each one of them and even simulate purchasing them!
-![Alt text](MainPageExample.jpg?raw=true)
+![](MainPageExample.jpg?raw=true | width=200)
 * Portfolio
+
 Here you can see all the items you've bought and click on them to view extra info about each purchase.
-![Alt text](PortfolioExample.jpg?raw=true)
+![](PortfolioExample.jpg?raw=true | width=200)
 
 ## FAQ
 
