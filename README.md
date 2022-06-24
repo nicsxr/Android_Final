@@ -12,11 +12,11 @@ Just download the app, launch it and you are all set! Inside the app, you have t
 * Current Prices
 
 Here, you can view up-to-date prices of various crypto currencies. You can pick one to see extra info about each one of them and even simulate purchasing them!
-![](MainPageExample.jpg?raw=true | width=200)
+![alt text](MainPageExample.jpg?raw=true | width=200)
 * Portfolio
 
 Here you can see all the items you've bought and click on them to view extra info about each purchase.
-![](PortfolioExample.jpg?raw=true | width=200)
+![alt text](PortfolioExample.jpg?raw=true | width=200)
 
 ## FAQ
 
